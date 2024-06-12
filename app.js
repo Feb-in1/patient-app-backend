@@ -1,7 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
-const {patientmodel}=require("./models/patient.js")
+const { patientmodel } = require("./models/patient.js")
 
 
 const app = express()
@@ -14,6 +14,19 @@ app.post("/", (req, res) => {
     let patient = new patientmodel(input)
     patient.save()
     res.json({ "status": "Success" })
+})
+
+app.post("/search", (req, res) => {
+    let input = req.body
+    patientmodel.find(input).then(
+        (data) => {
+            res.json(data)
+        }
+    ).catch(
+        (error) => {
+            res.json(error)
+        })
+
 })
 
 app.get("/ViewAll", (req, res) => {
