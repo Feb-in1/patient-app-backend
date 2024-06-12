@@ -29,6 +29,20 @@ app.post("/search", (req, res) => {
 
 })
 
+app.post("/delete", (req, res) => {
+    let input=req.body
+    patientmodel.findByIdAndDelete(input._id).then(
+        (response)=>{
+            res.json({"status":"Success"})
+        }
+    ).catch(
+        (error)=>{
+            res.json({"status":error})
+           
+        })
+     
+})
+
 app.get("/ViewAll", (req, res) => {
     patientmodel.find().then(
         (data) => {
