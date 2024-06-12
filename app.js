@@ -16,6 +16,17 @@ app.post("/", (req, res) => {
     res.json({ "status": "Success" })
 })
 
+app.get("/ViewAll", (req, res) => {
+    patientmodel.find().then(
+        (data) => {
+            res.json(data)
+        }
+    ).catch((error) => {
+        res.json(error)
+    })
+
+})
+
 
 app.listen(8080, () => {
     console.log("Server Started")
